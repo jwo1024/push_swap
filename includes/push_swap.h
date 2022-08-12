@@ -77,9 +77,10 @@ int		ps_set_b_stack(t_stack *stack);
 void	ps_set_cmd_stack(t_cmd_stack *stack);
 
 /*small mass utils*/
-void	ps_sort_small_mass(t_stack *a, t_cmd_stack *cmd_stack);
+void	ps_sort_small_mass(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack, int *set);
 void	ps_sort_small_mass2(t_stack *a, t_cmd_stack *cmd_stack);
 void	ps_sort_small_mass3(t_stack *a, t_cmd_stack *cmd_stack);
+void	ps_sort_small_mass5(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack, int *set);
 
 /*extra utils*/
 int		ps_is_valid_input(int *set, int len);

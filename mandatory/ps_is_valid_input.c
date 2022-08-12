@@ -65,19 +65,22 @@ int	ps_insert_stack_argv(t_stack *stack, char *argv[])
 	int		data;
 	int		fro_data;
 	int		idx;
+	int		flg;
 
 	idx = 0;
 	argv++;
 	pstr = ps_ft_split(*argv, ' ');
 	argv++;
 	fro_data = 0;
+	flg = 0;
 	while (pstr != NULL)
 	{
 		if (ps_str_isdigit(pstr[idx]) == -1)
 			return (-1); // pstr 다 해제해주고
-		if (!(fro_data < data)) // 이미 정렬되어 있는 오름차순일경우 감지 sorted
-			;
 		data = ps_ft_atoi(pstr[idx++]);
+		if (stack->len != 0 && !(fro_data < data )) // 이미 정렬되어 있는 오름차순일경우 감지 sorted
+			flg = 1;
+	//	data = ps_ft_atoi(pstr[idx++]);
 		free(pstr[idx - 1]);
 		ps_insert_bottom_stack(stack, data);
 		fro_data = data;
@@ -89,6 +92,8 @@ int	ps_insert_stack_argv(t_stack *stack, char *argv[])
 			idx = 0;
 		}
 	}
+	if (flg == 0 && stack->len != 1)
+		return (0);
 	return (1);
 }
 

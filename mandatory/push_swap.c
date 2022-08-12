@@ -17,24 +17,30 @@ int	main(int argc, char *argv[])
 	t_stack		b_stack;
 	t_cmd_stack	cmd_stack;
 	int			*set;
+	int			rtn;
 
 	if (argc < 2)
 		return (0); // no argv
 	ps_set_cmd_stack(&cmd_stack);
 	ps_set_a_stack(&a_stack);
 	ps_set_b_stack(&b_stack);
-	if (ps_insert_stack_argv(&a_stack, argv) == -1)
+	rtn = ps_insert_stack_argv(&a_stack, argv);
+	if (rtn == -1)
 	{
 		ps_error();
 		//
+		return (1);
+	}
+	else if (rtn == 0)
+	{
 		return (1);
 	}
 	set = ps_quick_sort(&a_stack); /// 01 01 01 중간에 중단후 NULL 반환
 	if (set != NULL && ps_check_duplicates(set, a_stack.len) == 1) // 3 3 1
 	{
 
-		if (a_stack.len <= 3) // 4개 일경우...5 개일때 문제 있음 !
-			ps_sort_small_mass(&a_stack, &cmd_stack);
+		if (a_stack.len <= 5) // 4개 일경우...5 개일때 문제 있음 !
+			ps_sort_small_mass(&a_stack, &b_stack, &cmd_stack, set);
 		else
 			push_swap(&a_stack, &b_stack, &cmd_stack, set);
 		check_print_cmd(&cmd_stack);
