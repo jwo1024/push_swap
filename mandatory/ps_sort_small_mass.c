@@ -7,6 +7,8 @@ void	ps_sort_small_mass(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack)
 		ps_sort_small_mass2(a, cmd_stack);
 	else if (a->len == 3)
 		ps_sort_small_mass3(a, cmd_stack);
+	else // 4개 5개 일때.. 
+		;
 }
 
 void	ps_sort_small_mass2(t_stack *a, t_cmd_stack *cmd_stack)
