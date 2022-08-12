@@ -1,6 +1,16 @@
 
 #include	"push_swap.h"
 
+/*
+처리 해야 할것
+clear 함수 만들기
+ps_insert_stack_argv() pstr free 해주기
+int max, min 처리 하기
+argc 5개 처리하기
+norminette 돌리기 + 함수 분리
+정렬되어서 들어왔을때 처리
+*/
+
 int	main(int argc, char *argv[])
 {
 	t_stack		a_stack;
@@ -11,25 +21,34 @@ int	main(int argc, char *argv[])
 	if (argc < 2)
 		return (0); // no argv
 	ps_set_cmd_stack(&cmd_stack);
-	ps_set_a_stack(&a_stack, argv);
+	ps_set_a_stack(&a_stack);
 	ps_set_b_stack(&b_stack);
+	if (ps_insert_stack_argv(&a_stack, argv) == -1)
+	{
+		ps_error();
+		//
+		return (1);
+	}
+	set = ps_quick_sort(&a_stack); /// 01 01 01 중간에 중단후 NULL 반환
+	if (set != NULL && ps_check_duplicates(set, a_stack.len) == 1) // 3 3 1
+	{
 
-	set = ps_quick_sort(&a_stack);
-//	if (set == NULL || ps_is_valid_input(set, a_stack.len) == 0)
-//		ps_error();
-	//	ps_error("Error\n : ps_quick_sort() : overlapping numbers");
-	//	ps_clear_stack();
-//	getchar(); // 유효성까지 끝낸다음 아래
-	if (a_stack.len <= 3) // 4개 일경우... ! 
-		ps_sort_small_mass(&a_stack, &cmd_stack);
+		if (a_stack.len <= 3) // 4개 일경우...5 개일때 문제 있음 !
+			ps_sort_small_mass(&a_stack, &cmd_stack);
+		else
+			push_swap(&a_stack, &b_stack, &cmd_stack, set);
+		check_print_cmd(&cmd_stack);
+		// ps_clear_all(&a_stack, &b_stac, &cmd_stack, &set);
+		free(set);
+	}
 	else
-		push_swap(&a_stack, &b_stack, &cmd_stack, set);
-
+	{
+		ps_error();
+		// ps_clear_all();
+		free(set);
+		return (1);
+	}
 //	print_ab_stack(&a_stack, &b_stack);
-	check_print_cmd(&cmd_stack);
-	// ps_clear_all();
-
-	free(set);
 	return (0);
 }
 
@@ -50,8 +69,10 @@ int	push_swap(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack, int *set)
 		ps_sort_mass(a, b, cmd_stack, piv[0]);
 	while (b->len > 1)
 		ps_sort_mass(a, b, cmd_stack, set[0]);
+	
 	if (b->len)
 		ps_sort_mass_rotate(a, cmd_stack, b->top->data, 0);
+	//	print_ab_stack(a, b);
 	ps_cmd_pab(b, a, cmd_stack);
 	ps_final_rotate(a, cmd_stack, set);
 	free(piv);
@@ -87,6 +108,4 @@ void	ps_get_pivot(int **piv, int len, int *set) //여기에서 오류 나는 이
 	len -= 2;
 	(*piv)[0] = set[len / 3];
 	(*piv)[1] = set[len / 3 * 2 + 1];
-	if (len % 3 == 2)
-		piv[1]++; // 이거 맞아 ?? 이상한데
 }

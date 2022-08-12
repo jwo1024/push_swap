@@ -1,6 +1,6 @@
 #include	"push_swap.h"
 
-int	ft_isdigit(int c);
+int	ps_str_isdigit(char *str);
 int	ps_insert_bottom_stack(t_stack *stack, int data);
 int	ps_insert_stack_argv(t_stack *stack, char *argv[]);
 
@@ -20,19 +20,43 @@ int	ps_check_duplicates(int *set, int len) //ps_is_valid_input
 
 void	ps_error()
 {
-	write(2, "\nError", 6);
+	write(2, "Error\n", 6);
 }
 
 
-int	ft_isdigit(int c)
+int	ps_str_isdigit(char *str)
 {
-	if ('0' <= c && c <= '9')
-		return (3); //
-	return (0); // -1
+	int	i;
+
+	i = 0;
+	if (str == NULL || str[i] == '\0')
+		return (-1);
+	if (str[i] == '-')
+		i++;
+	while (str[i])
+	{
+		if ('0' <= str[i] && str[i] <= '9') // int min int max 확인.. -2147483647 2147483648
+			;
+		else
+			return (-1);
+		i++;
+	}
+	if ((i > 11 && str[0] == '-') || (i > 10 && str[0] != '-') && 1) /// atoi 변형해서
+		return (-1);
+/*
+	if ((i > 11 && str[0] == '-') || (i > 10 && str[0] != '-')\
+		|| (i == 11 && (str[0] == '-' || str[1] >= '2' || str[2] >= '1' \
+		|| str[3] >= '4' || str[4] >= '7' || str[5] >= '4' || str[6] >= '8' \
+		|| str[7] >= '3' || str[8] >= '6' || str[9] >= '4' || str[10] > '7')) \
+		|| (i == 10 && (str[0] >= '2' || str[1] >= '1' || str[2] >= '4' \
+		|| str[3] >= '7' || str[4] >= '4' || str[5] >= '8' || str[6] >= '3' \
+		|| str[7] >= '6' || str[8] >= '4') && str[9] > '8')) // 
+		return (-1); ///아 이거 아닌듯 atoi ....... 로 다시 받아서 확인 하는게 나을듯
+*/
+	return (1);
 }
 
 
-int	ps_insert_bottom_stack(t_stack *stack, int data);
 
 
 int	ps_insert_stack_argv(t_stack *stack, char *argv[])
@@ -49,11 +73,11 @@ int	ps_insert_stack_argv(t_stack *stack, char *argv[])
 	fro_data = 0;
 	while (pstr != NULL)
 	{
-		if (1) // 이미 정렬되어 있는 오름차순일경우 감지
-			;
-		if (1) // ft_isdigit ? 확인 한번 해주기
+		if (ps_str_isdigit(pstr[idx]) == -1)
 			return (-1); // pstr 다 해제해주고
-		data = ps_ft_atoi(pstr[idx++]); // valid 한 인자인지 확인은 요기 어디선가.
+		if (!(fro_data < data)) // 이미 정렬되어 있는 오름차순일경우 감지 sorted
+			;
+		data = ps_ft_atoi(pstr[idx++]);
 		free(pstr[idx - 1]);
 		ps_insert_bottom_stack(stack, data);
 		fro_data = data;
@@ -69,7 +93,7 @@ int	ps_insert_stack_argv(t_stack *stack, char *argv[])
 }
 
 
-int	ps_insert_bottom_stack(t_stack *stack, int	data)
+int	ps_insert_bottom_stack(t_stack *stack, int data)
 {
 	t_list	*list;
 	
@@ -78,8 +102,8 @@ int	ps_insert_bottom_stack(t_stack *stack, int	data)
 		return (-1);
 	list->data = data;
 	list->next = NULL;
-	stack->bottom->next = list;
-	list->flag = 0; // 이거 지워도 되나 확인 쓰이는 곳 없나
+	if (stack->bottom != NULL)
+		stack->bottom->next = list;
 	stack->bottom = list;
 	if (stack->len == 0)
 		stack->top = list;

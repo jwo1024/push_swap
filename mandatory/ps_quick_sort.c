@@ -18,7 +18,7 @@ void	sort_quick_ascending(int *set, int left, int right)
 	{
 		while (*pivot > set[l] && l <= r)
 			l++;
-		while (*pivot < set[r] && l <= r)
+		while (*pivot <= set[r] && l <= r)
 			r--;
 		if (l < r)
 			sort_swap(&(set[l]), &(set[r]));

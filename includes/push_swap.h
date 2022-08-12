@@ -26,7 +26,7 @@ enum e_stack {
 
 typedef struct s_list {
 	int				data;
-	int				flag;
+//	int				flag;
 	struct s_list	*prev;
 	struct s_list	*next;
 }	t_list;
@@ -71,7 +71,8 @@ int		ps_cmd_rab(t_stack *stack, t_cmd_stack *cmd_stack);
 int		ps_cmd_rrab(t_stack *stack, t_cmd_stack *cmd_stack);
 
 /*set utils*/
-int		ps_set_a_stack(t_stack *stack, char *argv[]);
+//int		ps_set_a_stack(t_stack *stack, char *argv[]);
+int		ps_set_a_stack(t_stack *stack);
 int		ps_set_b_stack(t_stack *stack);
 void	ps_set_cmd_stack(t_cmd_stack *stack);
 
@@ -123,6 +124,12 @@ int			ps_check_combine_cmd(enum e_command a_cmd, enum e_command b_cmd);
 int			ps_print_cmd(enum e_command cmd);
 
 int			check_print_cmd(t_cmd_stack *cmd_stack);
+
+/*ps is valid input*/
+int	ps_check_duplicates(int *set, int len);
+int	ps_str_isdigit(char *str);
+int	ps_insert_stack_argv(t_stack *stack, char *argv[]);
+int	ps_insert_bottom_stack(t_stack *stack, int data);
 
 
 /* 삭제해야 할 것 */

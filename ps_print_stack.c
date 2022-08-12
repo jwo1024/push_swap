@@ -34,7 +34,7 @@ int	print_stack(t_stack *stack)
 	list = stack->top;
 	while (list)
 	{
-		printf("stack[%d] %d flag %d\n", i, list->data, list->flag);
+		printf("stack[%d] %d \n", i, list->data);
 		list = list->next;
 		i++;
 	}
