@@ -1,6 +1,5 @@
 #include	"push_swap.h"
 
-// ps_get_func_cnt   ps_sort_mass_cnt
 int	ps_get_stack_cnt_func(t_stack *stack, int num, int (fp)(t_stack *, int))
 {
 	int	cnt;
@@ -13,7 +12,7 @@ int	ps_get_stack_cnt_func(t_stack *stack, int num, int (fp)(t_stack *, int))
 	return (1);
 }
 
-int	ps_cnt_position_astack(t_stack *a, int num) //position_cnt_a  ps_is_position_up
+int	ps_cnt_position_astack(t_stack *a, int num)
 {
 	int		cnt;
 	t_list	*list;
@@ -34,7 +33,7 @@ int	ps_cnt_position_astack(t_stack *a, int num) //position_cnt_a  ps_is_position
 	return (cnt);
 }
 
-int	ps_cnt_position_bstack(t_stack *a, int num) // position_cnt_b // ps_is_position_down
+int	ps_cnt_position_bstack(t_stack *a, int num)
 {
 	int		cnt;
 	t_list	*list;

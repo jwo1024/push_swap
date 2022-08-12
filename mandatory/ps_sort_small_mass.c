@@ -1,7 +1,7 @@
 #include	"push_swap.h"
 
 
-void	ps_sort_small_mass(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack)
+void	ps_sort_small_mass(t_stack *a, t_cmd_stack *cmd_stack) // b
 {
 	if (a->len == 2)
 		ps_sort_small_mass2(a, cmd_stack);

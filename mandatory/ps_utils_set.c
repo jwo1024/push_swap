@@ -1,6 +1,6 @@
 #include	"push_swap.h"
 
-int	ps_set_a_stack(t_stack *stack, int argc, char *argv[]) // 함수 나누기
+int	ps_set_a_stack(t_stack *stack, char *argv[]) // 함수 나누기
 {
 	t_list	*list;
 	char	**pstr;
@@ -9,10 +9,10 @@ int	ps_set_a_stack(t_stack *stack, int argc, char *argv[]) // 함수 나누기
 	ps_set_b_stack(stack);
 	stack->stack = A_STACK;
 
+//
 	stack->top = (t_list *)malloc(sizeof(t_list));
 	list = stack->top;
 	list->flag = 0;
-
 	idx = 0;
 	argv++;
 	pstr = ps_ft_split(*argv, ' ');
@@ -39,6 +39,7 @@ int	ps_set_a_stack(t_stack *stack, int argc, char *argv[]) // 함수 나누기
 	}
 	stack->bottom = list;
 	list->next = NULL;
+//
 	return (1);
 }
 

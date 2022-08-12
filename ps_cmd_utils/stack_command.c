@@ -4,7 +4,6 @@ int	combine_cmd(t_cmd_stack *cmd_stack)
 {
 	t_cmd_list *a_list;
 	t_cmd_list *b_list;
-	t_cmd_list *tmp_list;
 	enum e_command	cmd;
 
 
@@ -71,7 +70,7 @@ int	check_cmd(enum e_command cmd, enum e_stack stack, t_cmd_stack *cmd_stack) //
 			|| (cmd == CMD_RA && cmd_list->cmd == CMD_RRA) \
 			|| (cmd == CMD_RRA && cmd_list->cmd == CMD_RA)) // pa+pb = 0  (((ra + rra = 0))) sa + sa
 		{
-			pop = ps_pop_cmd_stack(cmd, cmd_stack->a); // top 삭제 
+			pop = ps_pop_cmd_stack(cmd_stack->a); // top 삭제 
 			free(pop);
 			return (0);
 		}
@@ -83,7 +82,7 @@ int	check_cmd(enum e_command cmd, enum e_stack stack, t_cmd_stack *cmd_stack) //
 			|| (cmd == CMD_RB && cmd_list->cmd == CMD_RRB) \
 			|| (cmd == CMD_RRB && cmd_list->cmd == CMD_RB)) // pa+pb = 0  (((rb + rrb =0 )) sb + sb
 		{
-			pop = ps_pop_cmd_stack(cmd, cmd_stack->b); // top 삭제 
+			pop = ps_pop_cmd_stack(cmd_stack->b); // top 삭제 
 			free(pop);
 			return (0);
 		}
@@ -93,14 +92,14 @@ int	check_cmd(enum e_command cmd, enum e_stack stack, t_cmd_stack *cmd_stack) //
 		if ((cmd == CMD_PA && cmd_stack->a->top->cmd == CMD_PB && cmd_stack->b->top->cmd == CMD_PB) \
 			|| (cmd == CMD_PB && cmd_stack->a->top->cmd == CMD_PA &&  cmd_stack->b->top->cmd == CMD_PA)) // pa+pb == 0 // a ㅏㅁ만 검사하면 안되지..;;
 		{
-			pop = ps_pop_cmd_stack(cmd, cmd_stack->a); // top 삭제 
+			pop = ps_pop_cmd_stack(cmd_stack->a); // top 삭제 
 			free(pop);
-			pop = ps_pop_cmd_stack(cmd, cmd_stack->b); // top 삭제 
+			pop = ps_pop_cmd_stack(cmd_stack->b); // top 삭제 
 			free(pop);
 			return (0);
 		}
 	}
-	return (1); // 
+	return (1);
 }
 
 
@@ -180,7 +179,3 @@ int	ps_print_cmd(enum e_command cmd)
 		write(2, "Error\n", 6);
 	return (1);
 }
-
-
-
-

@@ -6,15 +6,15 @@
 #    By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/22 15:27:03 by jiwolee           #+#    #+#              #
-#    Updated: 2022/08/12 16:07:44 by jiwolee          ###   ########seoul.kr   #
+#    Updated: 2022/08/12 21:40:04 by jiwolee          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= push_swap
 
 CC		= gcc -g
-CFLAG	=
-#CFLAG	= -Wall -Wextra -Werror
+#CFLAG	=
+CFLAG	= -Wall -Wextra -Werror
 
 HEADER	= ./includes
 
@@ -31,6 +31,7 @@ SRCS_1	= ./mandatory/push_swap.c \
 		  ./mandatory/ps_check_rotate_way.c \
 		 \
 		  ./mandatory/ps_quick_sort.c \
+		  ./mandatory/ps_rotate_mass.c \
 		  ./ps_print_stack.c 
 
 SRCS_2	= ./ps_cmd_utils/ps_stack_cmd.c \

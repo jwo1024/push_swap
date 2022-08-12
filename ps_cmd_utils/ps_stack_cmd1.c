@@ -40,7 +40,7 @@ int	ps_push_cmd_stack(enum e_command cmd, t_cmd_ab_stack *ab)
 	return (1);
 }
 
-t_cmd_list	*ps_pop_cmd_stack(enum e_command cmd, t_cmd_ab_stack *ab) // free 는 밖에서 해줘야 함
+t_cmd_list	*ps_pop_cmd_stack(t_cmd_ab_stack *ab) // free 는 밖에서 해줘야 함
 {
 	t_cmd_list	*pop;
 

@@ -71,12 +71,12 @@ int		ps_cmd_rab(t_stack *stack, t_cmd_stack *cmd_stack);
 int		ps_cmd_rrab(t_stack *stack, t_cmd_stack *cmd_stack);
 
 /*set utils*/
-int		ps_set_a_stack(t_stack *stack, int argc, char *argv[]);
+int		ps_set_a_stack(t_stack *stack, char *argv[]);
 int		ps_set_b_stack(t_stack *stack);
 void	ps_set_cmd_stack(t_cmd_stack *stack);
 
 /*small mass utils*/
-void	ps_sort_small_mass(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack);
+void	ps_sort_small_mass(t_stack *a, t_cmd_stack *cmd_stack);
 void	ps_sort_small_mass2(t_stack *a, t_cmd_stack *cmd_stack);
 void	ps_sort_small_mass3(t_stack *a, t_cmd_stack *cmd_stack);
 
@@ -86,12 +86,11 @@ void	ps_error();
 
 
 /*push swap*/
+int		push_swap(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack, int *set);
+void	ps_get_pivot(int **piv, int len, int *set);
 
 int		divide_to_three_mass(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack, int piv[2]);
-int		ps_sort_mass(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack, int piv);
-int		ps_sort_mass_rotate(t_stack *a, t_cmd_stack *cmd_stack, int num, int cnt);
 int		ps_is_right_top(t_stack *a, int num);
-int		ps_final_rotate(t_stack *a, t_cmd_stack *cmd_stack, int *set);
 int		ps_rotate_bstack(t_stack *b, int num, t_cmd_stack *cmd_stack);
 
 /*ps position cnt*/
@@ -102,28 +101,36 @@ int		ps_cnt_position_bstack(t_stack *a, int num);
 /*ps check rotate way*/
 int		ps_rotate_same_way(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack, int cnt[2]);
 int		ps_check_rotate_way(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack, int data);
-void	ps_rotate_rab(t_stack *a, t_cmd_stack *cmd_stack, int cnt);
-void	ps_rotate_rrab(t_stack *a, t_cmd_stack *cmd_stack, int cnt);
+void	ps_rotate_rrab_both(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack, int rev[2]);
+void	ps_rotate_rab_both(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack, int cnt[2]);
 
+int		ps_rotate_bstack(t_stack *b, int num, t_cmd_stack *cmd_stack); //
 
-
-int		check_print_cmd(t_cmd_stack *cmd_stack);
-
-
+/*ps rotate mass*/
+int		ps_sort_mass(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack, int piv);
+int		ps_sort_mass_rotate(t_stack *a, t_cmd_stack *cmd_stack, int num, int cnt);
+int		ps_final_rotate(t_stack *a, t_cmd_stack *cmd_stack, int *set);
+void	ps_rotate_rab(t_stack *a, t_cmd_stack *cmd_stack, int cnt); //
+void	ps_rotate_rrab(t_stack *a, t_cmd_stack *cmd_stack, int cnt); //
 
 /*  */
 int			ps_insert_cmd(enum e_command cmd, enum e_stack stack, t_cmd_stack *cmd_stack);
 int			ps_push_cmd_stack(enum e_command cmd, t_cmd_ab_stack *ab);
-t_cmd_list	*ps_pop_cmd_stack(enum e_command cmd, t_cmd_ab_stack *ab);
-t_cmd_list *ps_pop_bottom_cmd_stack(t_cmd_ab_stack *ab);
+t_cmd_list	*ps_pop_cmd_stack(t_cmd_ab_stack *ab);
+t_cmd_list	*ps_pop_bottom_cmd_stack(t_cmd_ab_stack *ab);
 int			check_cmd(enum e_command cmd, enum e_stack stack, t_cmd_stack *cmd_stack);
 int			ps_check_combine_cmd(enum e_command a_cmd, enum e_command b_cmd);
 int			ps_print_cmd(enum e_command cmd);
 
+int			check_print_cmd(t_cmd_stack *cmd_stack);
 
 
-
+/* 삭제해야 할 것 */
 int		print_ab_stack(t_stack *stack1, t_stack *stack2); // 디버깅용 마지막에 삭제하기
 int		print_stack(t_stack *stack); // 마지막에 삭제하기
+
+
+
+
 
 #endif

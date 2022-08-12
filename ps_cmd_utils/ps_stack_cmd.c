@@ -17,15 +17,10 @@ int	ps_cmd_sab(t_stack *stack, t_cmd_stack *cmd_stack)
 		stack->bottom = list1;
 
 	if (stack->stack == A_STACK)
-	{
 		ps_insert_cmd(CMD_SA, stack->stack, cmd_stack);
-	//	printf("sa\n");
-	}
 	else
-	{
 		ps_insert_cmd(CMD_SB, stack->stack, cmd_stack);
-	//	printf("sb\n");
-	}
+
 	return (1);
 }
 
@@ -43,17 +38,10 @@ int ps_cmd_pab(t_stack *from, t_stack *to, t_cmd_stack *cmd_stack)
 	to->len++;
 	if (to->len == 1)
 		to->bottom = list;
-
 	if (to->stack == A_STACK)
-	{
 		ps_insert_cmd(CMD_PA, AB_STACK, cmd_stack);
-	//	printf("pa\n");
-	}
 	else
-	{
 		ps_insert_cmd(CMD_PB, AB_STACK, cmd_stack);
-	//	printf("pb\n");
-	}
 	return (1);
 }
 
@@ -75,24 +63,14 @@ int	ps_cmd_rrab(t_stack *stack, t_cmd_stack *cmd_stack)
 	list2->next = NULL;
 	stack->bottom = list2;
 	if (stack->stack == A_STACK)
-	{
 		ps_insert_cmd(CMD_RRA, stack->stack, cmd_stack);
-	//	printf("rra\n");
-	}
 	else
-	{
 		ps_insert_cmd(CMD_RRB, stack->stack, cmd_stack);
-	//	printf("rrb\n");
-	}
 	return (1);
 }
 
 int	ps_cmd_rab(t_stack *stack, t_cmd_stack *cmd_stack)
 {
-	t_list	*list1;
-	t_list	*list2;
-	int		i;
-
 	if (stack->len < 2)
 		return (0);
 	stack->bottom->next = stack->top;
@@ -102,14 +80,8 @@ int	ps_cmd_rab(t_stack *stack, t_cmd_stack *cmd_stack)
 
 
 	if (stack->stack == A_STACK)
-	{
 		ps_insert_cmd(CMD_RA, stack->stack, cmd_stack);
-	//	printf("ra\n");
-	}
 	else
-	{
 		ps_insert_cmd(CMD_RB, stack->stack, cmd_stack);
-	//	printf("rb\n");
-	}
 	return (1);
 }
