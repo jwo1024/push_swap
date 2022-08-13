@@ -6,7 +6,7 @@
 #    By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/22 15:27:03 by jiwolee           #+#    #+#              #
-#    Updated: 2022/08/13 15:22:43 by jiwolee          ###   ########seoul.kr   #
+#    Updated: 2022/08/13 20:05:00 by jiwolee          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,12 +33,13 @@ SRCS_1	= ./mandatory/push_swap.c \
 		  ./mandatory/ps_check_rotate_way.c \
 		 \
 		  ./mandatory/ps_quick_sort.c \
-		  ./mandatory/ps_rotate_mass.c \
-		  ./ps_print_stack.c 
+		  ./mandatory/ps_rotate_mass.c
 
 SRCS_2	= ./ps_cmd_utils/ps_stack_cmd.c \
 		  ./ps_cmd_utils/ps_stack_cmd1.c \
-		  ./ps_cmd_utils/stack_command.c
+		  ./ps_cmd_utils/ps_stack_cmd2.c \
+		  ./ps_cmd_utils/ps_cmd_pop.c \
+		  ./ps_cmd_utils/ps_cmd_check_delete.c
 
 SRCS_3	= ./ps_libft/ps_ft_atoi.c \
 		  ./ps_libft/ps_ft_split.c \

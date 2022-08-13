@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ps_utils_clear.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/13 18:04:00 by jiwolee           #+#    #+#             */
+/*   Updated: 2022/08/13 20:10:33 by jiwolee          ###   ########seoul.kr  */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include	"push_swap.h"
 
@@ -42,4 +53,14 @@ void	ps_clear_cmd_ab_stack(t_cmd_ab_stack *ab)
 		}
 		free(ab);
 	}
+}
+
+void	ps_free_pstr(char **pstr)
+{
+	int	i;
+
+	i = 0;
+	while (pstr[i])
+		free(pstr[i++]);
+	free(pstr);
 }

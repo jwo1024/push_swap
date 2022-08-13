@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ps_quick_sort.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/13 17:50:26 by jiwolee           #+#    #+#             */
+/*   Updated: 2022/08/13 17:51:13 by jiwolee          ###   ########seoul.kr  */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include	"push_swap.h"
 
 void	sort_swap(int *a, int *b);
@@ -23,7 +35,7 @@ void	sort_quick_ascending(int *set, int left, int right)
 		if (l < r)
 			sort_swap(&(set[l]), &(set[r]));
 		else
-			break;
+			break ;
 	}
 	sort_swap(pivot, &(set[r]));
 	sort_quick_ascending(set, left, r - 1);
@@ -32,7 +44,7 @@ void	sort_quick_ascending(int *set, int left, int right)
 
 void	sort_swap(int *a, int *b)
 {
-	int tmp;
+	int	tmp;
 
 	tmp = *a;
 	*a = *b;
@@ -41,16 +53,16 @@ void	sort_swap(int *a, int *b)
 
 int	*ps_quick_sort(t_stack *stack)
 {
-	int	*set;
-	int	len;
-	int	i;
+	int		*set;
+	int		len;
+	int		i;
 	t_list	*list;
 
 	len = stack->len;
 	set = (int *)malloc(sizeof(int) * len);
 	list = stack->top;
 	i = 0;
-	while(i < len && list)
+	while (i < len && list)
 	{
 		set[i] = list->data;
 		list = list->next;

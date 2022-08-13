@@ -1,20 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ps_stack_cmd1.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/13 18:22:11 by jiwolee           #+#    #+#             */
+/*   Updated: 2022/08/13 19:35:25 by jiwolee          ###   ########seoul.kr  */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include	"push_swap.h"
 
-int	ps_insert_cmd(enum e_command cmd, enum e_stack stack, t_cmd_stack *cmd_stack)
+int	ps_insert_cmd(enum e_command cmd, \
+				enum e_stack stack, t_cmd_stack *cmd_stack)
 {
 	if (stack == A_STACK)
 	{
-		if (check_cmd(cmd, stack, cmd_stack))
+		if (ps_check_cmd(cmd, stack, cmd_stack))
 			ps_push_cmd_stack(cmd, cmd_stack->a);
 	}
 	else if (stack == B_STACK)
 	{
-		if (check_cmd(cmd, stack, cmd_stack))
+		if (ps_check_cmd(cmd, stack, cmd_stack))
 			ps_push_cmd_stack(cmd, cmd_stack->b);
 	}
 	else if (stack == AB_STACK)
 	{
-		if (check_cmd(cmd, stack, cmd_stack))
+		if (ps_check_cmd(cmd, stack, cmd_stack))
 		{
 			ps_push_cmd_stack(cmd, cmd_stack->a);
 			ps_push_cmd_stack(cmd, cmd_stack->b);
@@ -23,7 +36,7 @@ int	ps_insert_cmd(enum e_command cmd, enum e_stack stack, t_cmd_stack *cmd_stack
 	return (0);
 }
 
-int	ps_push_cmd_stack(enum e_command cmd, t_cmd_ab_stack *ab) // null 가드?
+int	ps_push_cmd_stack(enum e_command cmd, t_cmd_ab_stack *ab)
 {
 	t_cmd_list	*new;
 
@@ -54,11 +67,13 @@ t_cmd_list	*ps_pop_cmd_stack(t_cmd_ab_stack *ab)
 	return (pop);
 }
 
-t_cmd_list *ps_pop_bottom_cmd_stack(t_cmd_ab_stack *ab)
+t_cmd_list	*ps_pop_bottom_cmd_stack(t_cmd_ab_stack *ab)
 {
 	t_cmd_list	*pop;
 
-	pop = ab->bottom; //pop == NULL??????????
+	if (ab->bottom == NULL)
+		return (NULL);
+	pop = ab->bottom;
 	ab->bottom = ab->bottom->prev;
 	if (ab->bottom != NULL)
 		ab->bottom->next = NULL;

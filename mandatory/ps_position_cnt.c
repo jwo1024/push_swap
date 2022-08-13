@@ -1,10 +1,25 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ps_position_cnt.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/13 17:48:48 by jiwolee           #+#    #+#             */
+/*   Updated: 2022/08/13 17:57:46 by jiwolee          ###   ########seoul.kr  */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include	"push_swap.h"
 
-int	ps_get_stack_cnt_func(t_stack *stack, int num, int (fp)(t_stack *, int))
+int	ps_get_min_rotate_cnt(t_stack *stack, int num)
 {
 	int	cnt;
 
-	cnt = fp(stack, num);
+	if (stack->stack == A_STACK)
+		cnt = ps_cnt_position_astack(stack, num);
+	else
+		cnt = ps_cnt_position_bstack(stack, num);
 	if (cnt <= stack->len / 2)
 		return (cnt);
 	else
@@ -22,11 +37,13 @@ int	ps_cnt_position_astack(t_stack *a, int num)
 	while (1)
 	{
 		if ((list->next == NULL || list->data > list->next->data) \
-			&& (list->data < num || (list->next == NULL || list->next->data > num)))
-			break;
+			&& (list->data < num || (list->next == NULL || \
+			list->next->data > num)))
+			break ;
 		else if ((list->next == NULL || list->data < list->next->data) \
-				&& list->data < num && (list->next == NULL || list->next->data > num))
-			break;
+				&& list->data < num && (list->next == NULL || \
+				list->next->data > num))
+			break ;
 		list = list->next;
 		cnt++;
 	}

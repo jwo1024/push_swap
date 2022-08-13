@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ps_stack_cmd.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/08/13 18:21:05 by jiwolee           #+#    #+#             */
+/*   Updated: 2022/08/13 18:21:18 by jiwolee          ###   ########seoul.kr  */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include	"push_swap.h"
 
@@ -22,7 +33,7 @@ int	ps_cmd_sab(t_stack *stack, t_cmd_stack *cmd_stack)
 	return (1);
 }
 
-int ps_cmd_pab(t_stack *from, t_stack *to, t_cmd_stack *cmd_stack)
+int	ps_cmd_pab(t_stack *from, t_stack *to, t_cmd_stack *cmd_stack)
 {
 	t_list	*list;
 
