@@ -3,12 +3,13 @@
 
 /*
 처리 해야 할것
-clear 함수 만들기
-ps_insert_stack_argv() pstr free 해주기
-int max, min 처리 하기
+clear 함수 만들기 v
+ps_insert_stack_argv() pstr free 해주기 v
+int max, min 처리 하기 v
 argc 5개 처리하기
 norminette 돌리기 + 함수 분리
-정렬되어서 들어왔을때 처리
+함수 반환 확인
+정렬되어서 들어왔을때 처리 v
 */
 
 int	push_swap_1(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack, int *set);
@@ -68,12 +69,12 @@ int	push_swap_1(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack, int *set)
 		ps_sort_mass(a, b, cmd_stack, piv[1]);
 	while (b->len && (b->top->data > piv[0] || b->bottom->data > piv[0]))
 		ps_sort_mass(a, b, cmd_stack, piv[0]);
-	while (b->len > 1)
+	while (b->len > 0)
 		ps_sort_mass(a, b, cmd_stack, set[0]);
 	
-	if (b->len)
-		ps_sort_mass_rotate(a, cmd_stack, b->top->data, 0);
-	ps_cmd_pab(b, a, cmd_stack); //// um.. 
+//	if (b->len)
+//		ps_sort_mass_rotate(a, cmd_stack, b->top->data, 0);
+//	ps_cmd_pab(b, a, cmd_stack); //// um.. 
 
 	ps_final_rotate(a, cmd_stack, set);
 	free(piv);
