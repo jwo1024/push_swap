@@ -3,7 +3,9 @@
 
 void	ps_sort_small_mass(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack, int *set)
 {
-	if (a->len == 2)
+	if (a->len == 1)
+		;
+	else if (a->len == 2)
 		ps_sort_small_mass2(a, cmd_stack);
 	else if (a->len == 3)
 		ps_sort_small_mass3(a, cmd_stack);
@@ -40,7 +42,7 @@ void	ps_sort_small_mass5(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack, int *se
 	{
 		if (a->top->data < piv)
 			ps_cmd_pab(a, b, cmd_stack);
-		ps_cmd_rab(a, cmd_stack)
+		ps_cmd_rab(a, cmd_stack);
 	}
 	ps_sort_small_mass3(a, cmd_stack);
 	if (b->top->data < b->bottom->data)

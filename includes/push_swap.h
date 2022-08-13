@@ -1,6 +1,6 @@
 #ifndef PUSH_SWAP_H
 
-# include	<stdio.h>
+# include	<stdio.h> ///////
 # include	<stdlib.h>
 # include	<unistd.h>
 
@@ -26,7 +26,6 @@ enum e_stack {
 
 typedef struct s_list {
 	int				data;
-//	int				flag;
 	struct s_list	*prev;
 	struct s_list	*next;
 }	t_list;
@@ -40,7 +39,6 @@ typedef struct s_stack {
 
 typedef struct s_cmd_list {
 	enum e_command		cmd;
-	int					cnt;
 	struct s_cmd_list	*prev;
 	struct s_cmd_list	*next;
 }	t_cmd_list;
@@ -83,8 +81,11 @@ void	ps_sort_small_mass3(t_stack *a, t_cmd_stack *cmd_stack);
 void	ps_sort_small_mass5(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack, int *set);
 
 /*extra utils*/
-int		ps_is_valid_input(int *set, int len);
-void	ps_error();
+
+/*clear utils*/
+void	ps_clear_all(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack, int *set);
+void	ps_clear_stack(t_stack *stack);
+void	ps_clear_cmd_ab_stack(t_cmd_ab_stack *ab);
 
 
 /*push swap*/
@@ -127,10 +128,13 @@ int			ps_print_cmd(enum e_command cmd);
 int			check_print_cmd(t_cmd_stack *cmd_stack);
 
 /*ps is valid input*/
-int	ps_check_duplicates(int *set, int len);
-int	ps_str_isdigit(char *str);
-int	ps_insert_stack_argv(t_stack *stack, char *argv[]);
 int	ps_insert_bottom_stack(t_stack *stack, int data);
+int	ps_insert_stack_argv(t_stack *stack, char *argv[]);
+int	ps_check_valid_num(char *str);
+int	ps_check_valid_num_1(char *str, int i);
+int	ps_is_already_sorted(t_stack *stack);
+int		ps_check_duplicates(int *set, int len);
+void	ps_error();
 
 
 /* 삭제해야 할 것 */

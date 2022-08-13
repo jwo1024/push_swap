@@ -1,102 +1,19 @@
 #include	"push_swap.h"
 
-int	ps_str_isdigit(char *str);
 int	ps_insert_bottom_stack(t_stack *stack, int data);
 int	ps_insert_stack_argv(t_stack *stack, char *argv[]);
+int	ps_check_valid_num(char *str);
+int	ps_check_valid_num_1(char *str, int i);
+int	ps_is_already_sorted(t_stack *stack);
 
-int	ps_check_duplicates(int *set, int len) //ps_is_valid_input
-{
-	int	i;
+int		ps_check_duplicates(int *set, int len);
+void	ps_error();
 
-	i = 0;
-	while (i + 1 < len)
-	{
-		if (set[i] == set[i + 1]) // 같은 숫자 있을 경우 에러처리
-			return (-1);
-		i++;
-	}
-	return (1);
-}
 
 void	ps_error()
 {
 	write(2, "Error\n", 6);
 }
-
-
-int	ps_str_isdigit(char *str)
-{
-	int	i;
-
-	i = 0;
-	if (str == NULL || str[i] == '\0')
-		return (-1);
-	if (str[i] == '-')
-		i++;
-	while (str[i])
-	{
-		if ('0' <= str[i] && str[i] <= '9') // int min int max 확인.. -2147483647 2147483648
-			;
-		else
-			return (-1);
-		i++;
-	}
-	if ((i > 11 && str[0] == '-') || (i > 10 && str[0] != '-') && 1) /// atoi 변형해서
-		return (-1);
-/*
-	if ((i > 11 && str[0] == '-') || (i > 10 && str[0] != '-')\
-		|| (i == 11 && (str[0] == '-' || str[1] >= '2' || str[2] >= '1' \
-		|| str[3] >= '4' || str[4] >= '7' || str[5] >= '4' || str[6] >= '8' \
-		|| str[7] >= '3' || str[8] >= '6' || str[9] >= '4' || str[10] > '7')) \
-		|| (i == 10 && (str[0] >= '2' || str[1] >= '1' || str[2] >= '4' \
-		|| str[3] >= '7' || str[4] >= '4' || str[5] >= '8' || str[6] >= '3' \
-		|| str[7] >= '6' || str[8] >= '4') && str[9] > '8')) // 
-		return (-1); ///아 이거 아닌듯 atoi ....... 로 다시 받아서 확인 하는게 나을듯
-*/
-	return (1);
-}
-
-
-
-
-int	ps_insert_stack_argv(t_stack *stack, char *argv[])
-{
-	char	**pstr;
-	int		data;
-	int		fro_data;
-	int		idx;
-	int		flg;
-
-	idx = 0;
-	argv++;
-	pstr = ps_ft_split(*argv, ' ');
-	argv++;
-	fro_data = 0;
-	flg = 0;
-	while (pstr != NULL)
-	{
-		if (ps_str_isdigit(pstr[idx]) == -1)
-			return (-1); // pstr 다 해제해주고
-		data = ps_ft_atoi(pstr[idx++]);
-		if (stack->len != 0 && !(fro_data < data )) // 이미 정렬되어 있는 오름차순일경우 감지 sorted
-			flg = 1;
-	//	data = ps_ft_atoi(pstr[idx++]);
-		free(pstr[idx - 1]);
-		ps_insert_bottom_stack(stack, data);
-		fro_data = data;
-		if (pstr[idx] == NULL)
-		{
-			free(pstr);
-			pstr = ps_ft_split(*argv, ' ');
-			argv++;
-			idx = 0;
-		}
-	}
-	if (flg == 0 && stack->len != 1)
-		return (0);
-	return (1);
-}
-
 
 int	ps_insert_bottom_stack(t_stack *stack, int data)
 {
@@ -116,21 +33,119 @@ int	ps_insert_bottom_stack(t_stack *stack, int data)
 	return (1);
 }
 
-// 1 2 3 4 
-// 
+// --------------------------------
 
-/*
+int	ps_insert_stack_argv(t_stack *stack, char *argv[])
+{
+	char	**pstr;
+	int		idx;
 
-검사해야할것
+	idx = 0;
+	argv++;
+	pstr = ps_ft_split(*argv, ' ');
+	argv++;
+	while (pstr != NULL)
+	{
+		if (ps_check_valid_num(pstr[idx]) == -1)
+		{
+			while (pstr[idx])
+				free(pstr[idx++]);
+			free(pstr);
+			return (-1);
+		}
+		ps_insert_bottom_stack(stack, ps_ft_atoi(pstr[idx]));
+		free(pstr[idx++]);
+		if (pstr[idx] == NULL)
+		{
+			free(pstr);
+			pstr = ps_ft_split(*argv, ' ');
+			argv++;
+			idx = 0;
+		}
+	}
+	return (1);
+}
 
-- 같은 숫자 duplicates
-- 이미 정렬되었는지
 
-- 숫자가 아닌 문자
-- 공백 " "
+int	ps_check_duplicates(int *set, int len) //ps_is_valid_input
+{
+	int	i;
 
-- integer 범위 ---> atoi 에서 다뤄야 하나?
+	i = 0;
+	while (i + 1 < len)
+	{
+		if (set[i] == set[i + 1]) // 같은 숫자 있을 경우 에러처리
+			return (-1);
+		i++;
+	}
+	return (1);
+}
 
 
+int	ps_check_valid_num(char *str)
+{
+	int					i;
 
-*/
+	i = 1;
+	if (str == NULL)
+		return (-1);
+	while (*str == ' ' || *str == '\n' || *str == '\t'
+		|| *str == '\v' || *str == '\f' || *str == '\r')
+		str++;
+	if (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			i *= -1;
+		str++;
+	}
+	if (*str == '\0')
+		return (-1);
+	return (ps_check_valid_num_1(str, i));
+}
+
+int	ps_check_valid_num_1(char *str, int i)
+{
+	unsigned long long	mul;
+	unsigned long long	result;
+	int					idx;
+
+	mul = 1;
+	idx = 0;
+	result = 0;
+	while (str[idx])
+	{
+		if (!('0' <= str[idx] && str[idx] <= '9'))// ft_isdigit > 0 
+			return (-1);
+		idx++;
+	}
+	while (0 < idx--)
+	{
+		result += (str[idx] - '0') * mul;
+		if (mul == 1000000000)
+			break;
+		mul *= 10;
+	}
+	if ((result > 2147483648 && i == -1) \
+		|| (result > 2147483647 && i == 1) || idx > 0)
+		return (-1);
+	return (1);
+}
+
+
+int	ps_is_already_sorted(t_stack *stack)
+{
+	t_list	*list;
+	int		flg;
+
+	flg = 0;
+	list = stack->top;
+	while (list->next)
+	{
+		if (list->data > list->next->data)
+			flg = 1;
+		list = list->next;
+	}
+	if (flg == 1)
+		return (-1);
+	return (1);
+}
