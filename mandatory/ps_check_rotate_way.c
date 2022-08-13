@@ -72,6 +72,7 @@ int	ps_rotate_bstack(t_stack *b, int num, t_cmd_stack *cmd_stack) // 나갈애�
 
 
 // 함수명 바꾸기 ps_rotate_astack
+// cnt 삭제하기
 int	ps_sort_mass_rotate(t_stack *a, t_cmd_stack *cmd_stack, int num, int cnt) // 맞는 자리로 a스택 돌린다. 
 {
 	cnt = ps_cnt_position_astack(a, num);
@@ -90,14 +91,33 @@ int	ps_sort_mass_rotate(t_stack *a, t_cmd_stack *cmd_stack, int num, int cnt) //
 }
 
 
-void	ps_rotate_rrab_both(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack, int rev[2])
-{
-	ps_rotate_rrab(a, cmd_stack, rev[0]);
-	ps_rotate_rrab(b, cmd_stack, rev[1]);
-}
 
-void	ps_rotate_rab_both(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack, int cnt[2])
+
+int	ps_final_rotate(t_stack *a, t_cmd_stack *cmd_stack, int *set)
 {
-	ps_rotate_rab(a, cmd_stack,	cnt[0]);
-	ps_rotate_rab(b, cmd_stack, cnt[1]);
+	int		cnt;
+	t_list	*list;
+
+	cnt = 0;
+	list = a->top;
+	while (list)
+	{
+		if (list->data == set[0])
+			break;
+		list = list->next;
+		cnt++;
+	}
+	if (cnt <= a->len / 2) //만약 윗쪽에 위치한다면 
+	{
+		while (cnt--)
+			ps_cmd_rab(a, cmd_stack);	
+	}
+	else
+	{
+		cnt = a->len - cnt;
+		while (cnt--)
+			ps_cmd_rrab(a, cmd_stack);
+	}
+	return (1);
+
 }

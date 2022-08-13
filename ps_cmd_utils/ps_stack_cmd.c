@@ -15,12 +15,10 @@ int	ps_cmd_sab(t_stack *stack, t_cmd_stack *cmd_stack)
 	stack->top = list2;
 	if (stack->len == 2)
 		stack->bottom = list1;
-
 	if (stack->stack == A_STACK)
 		ps_insert_cmd(CMD_SA, stack->stack, cmd_stack);
 	else
 		ps_insert_cmd(CMD_SB, stack->stack, cmd_stack);
-
 	return (1);
 }
 

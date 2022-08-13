@@ -6,32 +6,26 @@ int	combine_cmd(t_cmd_stack *cmd_stack)
 	t_cmd_list *b_list;
 	enum e_command	cmd;
 
-
 	a_list = cmd_stack->a->top;
 	b_list = cmd_stack->b->top;
 	cmd = 0;
 	while (a_list && b_list)
 	{
 		cmd = ps_check_combine_cmd(a_list->cmd, b_list->cmd);
-		if (cmd != 0)
+		if (cmd != 0 || a_list->cmd == b_list->cmd)
 		{
-			a_list->cmd = cmd;
-			b_list->cmd = cmd;
+			if (cmd != 0)
+			{
+				a_list->cmd = cmd;
+				b_list->cmd = cmd;
+			}
 			a_list = a_list->next;
 			b_list = b_list->next;
 		}
-		else if (a_list->cmd == b_list->cmd)
-		{
-			a_list = a_list->next;
-			b_list = b_list->next;
-		}
-		else
-		{ 
-			if (a_list->cmd != CMD_PA && a_list->cmd != CMD_PB)
+		else if (a_list->cmd != CMD_PA && a_list->cmd != CMD_PB)
 				a_list = a_list->next;
-			if (b_list->cmd != CMD_PA && b_list->cmd != CMD_PB)
+		else if (b_list->cmd != CMD_PA && b_list->cmd != CMD_PB)
 				b_list = b_list->next;
-		}
 	}
 	return (1);
 }
@@ -66,19 +60,19 @@ int	check_cmd(enum e_command cmd, enum e_stack stack, t_cmd_stack *cmd_stack) //
 	if (stack == A_STACK)
 	{
 		cmd_list = cmd_stack->a->top;
-		while ((cmd == CMD_SA && cmd_list->cmd == CMD_SA) \
+		if ((cmd == CMD_SA && cmd_list->cmd == CMD_SA) \
 			|| (cmd == CMD_RA && cmd_list->cmd == CMD_RRA) \
 			|| (cmd == CMD_RRA && cmd_list->cmd == CMD_RA)) // pa+pb = 0  (((ra + rra = 0))) sa + sa
 		{
 			pop = ps_pop_cmd_stack(cmd_stack->a); // top 삭제 
 			free(pop);
 			return (0);
-		}
+		} // 왜 while 로 돌지 ? 어차피 return 하는데 ?
 	}
 	else if (stack == B_STACK)
 	{
 		cmd_list = cmd_stack->b->top;
-		while ((cmd == CMD_SB && cmd_list->cmd == CMD_SB) \
+		if ((cmd == CMD_SB && cmd_list->cmd == CMD_SB) \
 			|| (cmd == CMD_RB && cmd_list->cmd == CMD_RRB) \
 			|| (cmd == CMD_RRB && cmd_list->cmd == CMD_RB)) // pa+pb = 0  (((rb + rrb =0 )) sb + sb
 		{
@@ -113,9 +107,9 @@ int	check_print_cmd(t_cmd_stack *cmd_stack)
 	combine_cmd(cmd_stack);
 	while (cmd_stack->a->len && cmd_stack->b->len)
 	{
-		if (cmd_stack->a->bottom->cmd == cmd_stack->b->bottom->cmd)
+		if (cmd_stack->a->bottom->cmd == cmd_stack->b->bottom->cmd) // 두개가 같을때 하나만 출력
 		{
-			a_pop = ps_pop_bottom_cmd_stack(cmd_stack->a); // ps_pop_print_both_ab()
+			a_pop = ps_pop_bottom_cmd_stack(cmd_stack->a); // ps_pop_both_print()
 			b_pop = ps_pop_bottom_cmd_stack(cmd_stack->b);
 			ps_print_cmd(a_pop->cmd);
 			free(a_pop);
@@ -125,7 +119,7 @@ int	check_print_cmd(t_cmd_stack *cmd_stack)
 				&& cmd_stack->a->bottom->cmd != CMD_PB && cmd_stack->a->bottom->cmd != CMD_RR \
 				&& cmd_stack->a->bottom->cmd != CMD_RRR && cmd_stack->a->bottom->cmd != CMD_SS)
 		{
-			a_pop = ps_pop_bottom_cmd_stack(cmd_stack->a); // 함수화 하기 ps_pop_print()
+			a_pop = ps_pop_bottom_cmd_stack(cmd_stack->a); // 함수화 하기 ps_pop_one_print()
 			ps_print_cmd(a_pop->cmd);
 			free(a_pop);
 		}

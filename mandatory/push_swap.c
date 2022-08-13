@@ -8,7 +8,8 @@ clear 함수 만들기 v
 ps_insert_stack_argv() pstr free 해주기 v
 int max, min 처리 하기 v
 argc 5개 처리하기 V (그냥 둬도 12개이하) v
-norminette 돌리기 + 함수 분리
+norminette 돌리기 
+함수 분리(stack_command.c , psis_valid)
 함수 반환 확인
 헤더 정리
 정렬되어서 들어왔을때 처리 v
