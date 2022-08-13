@@ -30,22 +30,6 @@ int	ps_sort_mass(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack, int piv)
 	return (1);
 }
 
-int	ps_sort_mass_rotate(t_stack *a, t_cmd_stack *cmd_stack, int num, int cnt) // 맞는 자리로 a스택 돌린다. 
-{
-	cnt = ps_cnt_position_astack(a, num);
-	if (cnt <= a->len / 2)
-	{
-		while (cnt--)
-			ps_cmd_rab(a, cmd_stack);	
-	}
-	else
-	{
-		cnt = a->len - cnt;
-		while (cnt--)
-			ps_cmd_rrab(a, cmd_stack);
-	}
-	return (1);
-}
 
 int	ps_final_rotate(t_stack *a, t_cmd_stack *cmd_stack, int *set)
 {

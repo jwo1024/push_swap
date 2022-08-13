@@ -6,7 +6,7 @@ int	ps_insert_bottom_stack(t_stack *stack, int data);
 int	ps_insert_stack_argv(t_stack *stack, char *argv[]);
 int	ps_check_valid_num(char *str);
 int	ps_check_valid_num_1(char *str, int i);
-int	ps_is_already_sorted(t_stack *stack);
+int	ps_is_already_sorted(t_stack *stack); // check 
 
 int		ps_check_duplicates(int *set, int len);
 void	ps_error();
