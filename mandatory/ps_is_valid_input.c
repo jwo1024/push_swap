@@ -1,5 +1,7 @@
 #include	"push_swap.h"
 
+// check and insert num
+
 int	ps_insert_bottom_stack(t_stack *stack, int data);
 int	ps_insert_stack_argv(t_stack *stack, char *argv[]);
 int	ps_check_valid_num(char *str);
@@ -21,7 +23,7 @@ int	ps_insert_bottom_stack(t_stack *stack, int data)
 	
 	list = (t_list *)malloc(sizeof(t_list));
 	if (list == NULL)
-		return (-1);
+		exit(1);
 	list->data = data;
 	list->next = NULL;
 	if (stack->bottom != NULL)
@@ -42,7 +44,7 @@ int	ps_insert_stack_argv(t_stack *stack, char *argv[])
 
 	idx = 0;
 	argv++;
-	pstr = ps_ft_split(*argv, ' ');
+	pstr = ft_split(*argv, ' ');
 	argv++;
 	while (pstr != NULL)
 	{
@@ -53,19 +55,18 @@ int	ps_insert_stack_argv(t_stack *stack, char *argv[])
 			free(pstr);
 			return (-1);
 		}
-		ps_insert_bottom_stack(stack, ps_ft_atoi(pstr[idx]));
+		ps_insert_bottom_stack(stack, ft_atoi(pstr[idx]));
 		free(pstr[idx++]);
 		if (pstr[idx] == NULL)
 		{
 			free(pstr);
-			pstr = ps_ft_split(*argv, ' ');
+			pstr = ft_split(*argv, ' ');
 			argv++;
 			idx = 0;
 		}
 	}
 	return (1);
 }
-
 
 int	ps_check_duplicates(int *set, int len) //ps_is_valid_input
 {
@@ -80,7 +81,6 @@ int	ps_check_duplicates(int *set, int len) //ps_is_valid_input
 	}
 	return (1);
 }
-
 
 int	ps_check_valid_num(char *str)
 {

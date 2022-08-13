@@ -13,7 +13,7 @@ int	ps_sort_mass(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack, int piv)
 	data = 0;
 	while (list)
 	{
-		if (list->data >= piv) // > -> >=
+		if (list->data >= piv)
 		{
 			cnt[0] = ps_get_stack_cnt_func(a, list->data, ps_cnt_position_astack); // 
 			cnt[1] = ps_get_stack_cnt_func(b, list->data, ps_cnt_position_bstack);

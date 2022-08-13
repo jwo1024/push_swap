@@ -23,11 +23,13 @@ int	ps_insert_cmd(enum e_command cmd, enum e_stack stack, t_cmd_stack *cmd_stack
 	return (0);
 }
 
-int	ps_push_cmd_stack(enum e_command cmd, t_cmd_ab_stack *ab)
+int	ps_push_cmd_stack(enum e_command cmd, t_cmd_ab_stack *ab) // null 가드?
 {
 	t_cmd_list	*new;
 
 	new = (t_cmd_list *)malloc(sizeof(t_cmd_list));
+	if (new == NULL)
+		exit(1);
 	new->cmd = cmd;
 	new->next = ab->top;
 	ab->top = new;
@@ -40,7 +42,7 @@ int	ps_push_cmd_stack(enum e_command cmd, t_cmd_ab_stack *ab)
 	return (1);
 }
 
-t_cmd_list	*ps_pop_cmd_stack(t_cmd_ab_stack *ab) // free 는 밖에서 해줘야 함
+t_cmd_list	*ps_pop_cmd_stack(t_cmd_ab_stack *ab)
 {
 	t_cmd_list	*pop;
 

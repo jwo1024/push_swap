@@ -77,8 +77,6 @@ int	ps_cmd_rab(t_stack *stack, t_cmd_stack *cmd_stack)
 	stack->bottom = stack->top;
 	stack->top = stack->top->next;
 	stack->bottom->next = NULL;
-
-
 	if (stack->stack == A_STACK)
 		ps_insert_cmd(CMD_RA, stack->stack, cmd_stack);
 	else

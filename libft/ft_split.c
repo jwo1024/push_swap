@@ -1,22 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_ft_split.c                                      :+:      :+:    :+:   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/19 21:59:09 by jiwolee           #+#    #+#             */
-/*   Updated: 2022/08/12 00:30:53 by jiwolee          ###   ########seoul.kr  */
+/*   Updated: 2022/08/13 15:13:29 by jiwolee          ###   ########seoul.kr  */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"push_swap.h"
+#include	"libft.h"
 
 static char	**mk_arr(char const *s, char c);
 static char	**split_words(char **arr, char const *s, char c);
 static void	clear_words(char **arr, size_t cnt);
 
-char	**ps_ft_split(char const *s, char c)
+char	**ft_split(char const *s, char c)
 {
 	char	**arr;
 
@@ -44,7 +44,7 @@ static char	**split_words(char **arr, char const *s, char c)
 			k = i;
 			while (s[k] && s[k] != c)
 				k++;
-			arr[cnt] = ps_ft_substr(s, i, k - i);
+			arr[cnt] = ft_substr(s, i, k - i);
 			if (!arr[cnt])
 			{
 				clear_words(arr, cnt);

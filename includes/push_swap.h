@@ -1,8 +1,9 @@
 #ifndef PUSH_SWAP_H
 
-# include	<stdio.h> ///////
+# include	<stdio.h> ///////// 안쓰이면 삭제
 # include	<stdlib.h>
 # include	<unistd.h>
+# include	"../libft/libft.h"
 
 enum e_command {
 	CMD_SA = 1,
@@ -54,12 +55,6 @@ typedef struct s_cmd_stack {
 	t_cmd_ab_stack	*b;
 }	t_cmd_stack;
 
-/*libft & quick_sort*/
-int		ps_ft_atoi(const char *str);
-char	**ps_ft_split(char const *s, char c);
-size_t	ps_ft_strlcpy(char *dst, const char *src, size_t dstsize);
-size_t	ps_ft_strlen(const char *s);
-char	*ps_ft_substr(char const *s, unsigned int start, size_t len);
 int		*ps_quick_sort(t_stack *stack);
 
 /*cmd*/
@@ -70,15 +65,14 @@ int		ps_cmd_rrab(t_stack *stack, t_cmd_stack *cmd_stack);
 
 /*set utils*/
 //int		ps_set_a_stack(t_stack *stack, char *argv[]);
-int		ps_set_a_stack(t_stack *stack);
-int		ps_set_b_stack(t_stack *stack);
+void	ps_set_a_stack(t_stack *stack);
+void	ps_set_b_stack(t_stack *stack);
 void	ps_set_cmd_stack(t_cmd_stack *stack);
 
 /*small mass utils*/
-void	ps_sort_small_mass(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack, int *set);
+void	ps_sort_small_mass(t_stack *a, t_cmd_stack *cmd_stack);
 void	ps_sort_small_mass2(t_stack *a, t_cmd_stack *cmd_stack);
 void	ps_sort_small_mass3(t_stack *a, t_cmd_stack *cmd_stack);
-void	ps_sort_small_mass5(t_stack *a, t_stack *b, t_cmd_stack *cmd_stack, int *set);
 
 /*extra utils*/
 
@@ -140,9 +134,6 @@ void	ps_error();
 /* 삭제해야 할 것 */
 int		print_ab_stack(t_stack *stack1, t_stack *stack2); // 디버깅용 마지막에 삭제하기
 int		print_stack(t_stack *stack); // 마지막에 삭제하기
-
-
-
 
 
 #endif

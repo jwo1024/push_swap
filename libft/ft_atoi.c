@@ -1,21 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ps_ft_atoi.c                                       :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/09/24 19:57:54 by marvin            #+#    #+#             */
-/*   Updated: 2022/08/12 00:25:16 by jiwolee          ###   ########seoul.kr  */
+/*   Updated: 2022/01/21 22:30:07 by jiwolee          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include	"push_swap.h"
-
+#include	"libft.h"
 
 static int	rtn_ll(const char *str, unsigned long long result, int i);
 
-int	ps_ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
 	int					i;
 	unsigned long long	result;

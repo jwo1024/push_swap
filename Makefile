@@ -6,19 +6,21 @@
 #    By: jiwolee <jiwolee@student.42seoul.kr>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/22 15:27:03 by jiwolee           #+#    #+#              #
-#    Updated: 2022/08/12 21:40:04 by jiwolee          ###   ########seoul.kr   #
+#    Updated: 2022/08/13 15:22:43 by jiwolee          ###   ########seoul.kr   #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	= push_swap
 
 CC		= gcc -g
-#CFLAG	=
 CFLAG	= -Wall -Wextra -Werror
 
 HEADER	= ./includes
 
 INCLUDES = -I$(HEADER)
+
+LIB_DIR	= ./libft/
+LIB		= $(LIB_DIR)libft.a
 
 SRCS_1	= ./mandatory/push_swap.c \
  		  ./mandatory/ps_utils_clear.c \
@@ -44,7 +46,7 @@ SRCS_3	= ./ps_libft/ps_ft_atoi.c \
 		  ./ps_libft/ps_ft_strlen.c \
 		  ./ps_libft/ps_ft_substr.c
 
-SRCS	= $(SRCS_1) $(SRCS_2) $(SRCS_3)
+SRCS	= $(SRCS_1) $(SRCS_2)
 
 OBJS	= $(SRCS:.c=.o)
 
@@ -53,14 +55,19 @@ OBJS	= $(SRCS:.c=.o)
 
 all : $(NAME)
 
-$(NAME) : $(OBJS)
+$(LIB) :
+	make all -C $(LIB_DIR)
+
+$(NAME) : $(OBJS) $(LIB)
 	$(CC) $(CFLAG) $(INCLUDES) -o $@ $^
 
 clean :
 	rm -f $(OBJS)
+	make $@ -C $(LIB_DIR)
 
 fclean : clean
 	rm -f $(NAME)
+	make $@ -C $(LIB_DIR)
 
 re : fclean all
 
